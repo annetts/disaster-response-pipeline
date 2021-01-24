@@ -18,10 +18,11 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import classification_report
 
-
 nltk.download(['punkt', 'wordnet', 'stopwords'])
 
 def load_data(database_filepath):
+    ''' Function to read data in from the sqllite database.'''
+
     # load data from database
     dbPath = 'sqlite:///' + database_filepath
     print('db path: ', dbPath)
@@ -39,6 +40,8 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    ''' Function to tokenize and normalize words from the database.'''
+
     # Normalize text
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
 
@@ -56,6 +59,8 @@ def tokenize(text):
 
 
 def build_model():
+    ''' Function to build the classifier.'''
+    
     # Create pipeline
     
     pipeline_ada = Pipeline([
@@ -104,6 +109,8 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test):
+    ''' Function evaluate the generated model.'''
+    
     # Generate predictions
     y_pred = model.predict(X_test)
 
@@ -118,6 +125,8 @@ def evaluate_model(model, X_test, Y_test):
     
 
 def save_model(model, model_filepath):
+     ''' Function save the generated model.'''
+
     # Save model
     with open(model_filepath, 'wb') as file:
         pickle.dump(model, file)
