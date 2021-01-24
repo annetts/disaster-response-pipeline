@@ -26,7 +26,7 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///DisasterResponse.db')
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
 conn = engine.connect()
 
 df = pd.read_sql_table('messages', conn)
