@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    ''' Function to load data in from csv files.'''
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
 
@@ -16,6 +17,9 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    ''' Function to clean the loaded data from undefined 
+    and unnecessary rows.'''
+    
     # create a dataframe of the 36 individual category columns
     categories = pd.DataFrame(df.categories.str.split(';', 36, expand=True))
 
@@ -49,6 +53,8 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    ''' Function to save cleaned data to sqllite database.'''
+    
     engine = create_engine('sqlite:///' + database_filename)
     df.to_sql('messages', engine, index=False)
 
