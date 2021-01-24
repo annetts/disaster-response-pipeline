@@ -67,6 +67,7 @@ def build_model():
     ])
     
     
+    # didnt work well
     #pipeline = Pipeline([
     #    ('vect', CountVectorizer(tokenizer=tokenize)),
     #    ('tfidf', TfidfTransformer()),
@@ -85,7 +86,7 @@ def build_model():
         'clf__estimator__n_estimators': [100, 200]
     }
     
-    # The param grid still takes ~2h to search even at this modest size
+    # old parameters
     #parameters = {
     #    'tfidf__use_idf': (True, False),
     #    'clf__estimator__n_estimators': [50, 60, 70]
