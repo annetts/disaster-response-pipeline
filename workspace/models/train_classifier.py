@@ -21,7 +21,10 @@ from sklearn.metrics import classification_report
 nltk.download(['punkt', 'wordnet', 'stopwords'])
 
 def load_data(database_filepath):
-    ''' Function to read data in from the sqllite database.'''
+    ''' Function to read data in from the sqllite database.
+    INPUT - dataframe file path 
+    OUTPUT - X: message text column, Y: classification labels
+    '''
 
     # load data from database
     dbPath = 'sqlite:///' + database_filepath
@@ -40,8 +43,11 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
-    ''' Function to tokenize and normalize words from the database.'''
-
+    ''' Function to tokenize and normalize words from the database.
+    INPUT - text
+    OUTPUT - lemm: lemmatuzatinon of the input text
+    '''
+    
     # Normalize text
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
 
@@ -59,7 +65,9 @@ def tokenize(text):
 
 
 def build_model():
-    ''' Function to build the classifier.'''
+    ''' Function to build the classifier.
+    OUTPUT - ada_cv: GridSearchCV
+    '''
     
     # Create pipeline
     
@@ -109,7 +117,10 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test):
-    ''' Function evaluate the generated model.'''
+    ''' Function evaluate the generated model.
+    INPUT - model: model of the data, X_test: test data, Y_test: test data
+    OUTPUT - ada_cv: GridSearchCV
+    '''
     
     # Generate predictions
     y_pred = model.predict(X_test)
@@ -125,7 +136,9 @@ def evaluate_model(model, X_test, Y_test):
     
 
 def save_model(model, model_filepath):
-     ''' Function save the generated model.'''
+    ''' Function save the generated model.
+    INPUT - model: model of the data, model_filepath: model data file path
+    '''
 
     # Save model
     with open(model_filepath, 'wb') as file:
